@@ -1,3 +1,5 @@
+#Daniel Saul
+
 import json
 import urllib2
 import serial
@@ -23,16 +25,20 @@ def getAltitude():
     try:
         altitude = habitatdata['rows'][0]['doc']['data']['altitude']
     except: return prevAltitude
-    return altitude
+
+    if isinstance(altitude, str) == True:
+        return prevAltitude
+    else:
+        return altitude
 
 add_nulls = lambda number, zero_count : "{0:0{1}d}".format(number, zero_count)
 
-while serout.writable() == True:
+while True:
     currentAltitude = getAltitude()
     currentAltitude = '%0*d' % (5, currentAltitude)
     if currentAltitude != prevAltitude:
         serout.write(bytes(qualifier))
         serout.write(bytes(currentAltitude))
         print currentAltitude
-    prevAltitude = currentAltitude
+        prevAltitude = currentAltitude
 raw_input("Press ENTER to exit")
