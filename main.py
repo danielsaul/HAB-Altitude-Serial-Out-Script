@@ -5,14 +5,13 @@ import urllib2
 import serial
 import time
 
-port = '\\\.\CNCA0'
+port = 'COM3'
 baud = 19200
 qualifier = "HELLO"
-payload = "BUZZ"
+payload = "ALPHA"
 prevAltitude = 0
 
 serout = serial.Serial(port,baud,timeout=2,writeTimeout=2)
-
 
 def getAltitude():
     #Get data from Habitat
@@ -31,7 +30,6 @@ def getAltitude():
     else:
         return altitude
 
-
 while True:
     currentAltitude = getAltitude()
     currentAltitude = '%0*d' % (5, currentAltitude)
@@ -40,4 +38,5 @@ while True:
         serout.write(bytes(currentAltitude))
         print currentAltitude
         prevAltitude = currentAltitude
+
 raw_input("Press ENTER to exit")
