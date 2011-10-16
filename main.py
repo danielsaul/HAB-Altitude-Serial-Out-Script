@@ -8,7 +8,7 @@ import time
 port = 'COM3'
 baud = 19200
 qualifier = "HELLO"
-payload = "BUZZ"
+payload = "ALPHA"
 prevAltitude = 0
 
 serout = serial.Serial(port,baud,timeout=2,writeTimeout=2)
