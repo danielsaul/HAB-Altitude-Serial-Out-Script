@@ -31,7 +31,6 @@ def getAltitude():
     else:
         return altitude
 
-add_nulls = lambda number, zero_count : "{0:0{1}d}".format(number, zero_count)
 
 while True:
     currentAltitude = getAltitude()
